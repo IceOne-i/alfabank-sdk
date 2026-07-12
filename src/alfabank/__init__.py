@@ -62,7 +62,7 @@ try:
 except ImportError:  # pragma: no cover - version file is generated at build time
     __version__ = "0.0.0+unknown"
 
-__all__ = [
+__all__ = [  # noqa: RUF022 - sorted() order is mandated by test_all_is_sorted; RUF022 wants isort-style order
     "Account",
     "AccountBlockInfo",
     "Address",
