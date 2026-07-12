@@ -10,7 +10,7 @@ from typing import Any
 import pytest
 import respx
 
-from alfabank.client import AlfaBankClient
+from alfabank import AlfaBankClient
 
 _MOCKS_DIR = Path(__file__).resolve().parent.parent / "specs" / "alfa-api" / "mocks"
 
