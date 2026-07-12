@@ -5,11 +5,12 @@ from __future__ import annotations
 
 from datetime import date, datetime
 from decimal import Decimal
+from typing import Annotated
 
 from pydantic import Field
 
 from alfabank.enums import BlockType, CustomerCategory, CustomerStatus, SpecConditionCode
-from alfabank.models.common import _AlfaBase
+from alfabank.models.common import _AlfaBase, coerce_to_enum
 
 
 class OrganizationForm(_AlfaBase):
@@ -43,7 +44,7 @@ class Address(_AlfaBase):
 class SpecCondition(_AlfaBase):
     """Специальное условие (ограничение) по счёту."""
 
-    code: SpecConditionCode | str | None = None
+    code: Annotated[SpecConditionCode | str, coerce_to_enum(SpecConditionCode)] | None = None
     description: str | None = None
     value: bool | None = None
 
@@ -56,7 +57,7 @@ class AccountBlockInfo(_AlfaBase):
     cause: str | None = None
     initiator: str | None = None
     sum: Decimal | None = None
-    block_type: BlockType | str | None = None
+    block_type: Annotated[BlockType | str, coerce_to_enum(BlockType)] | None = None
 
 
 class BankRef(_AlfaBase):
@@ -101,8 +102,8 @@ class CustomerInfo(_AlfaBase):
     email: str | None = None
     kpps: list[str] = Field(default_factory=list)
     organization_form: OrganizationForm | None = None
-    category: CustomerCategory | str | None = None
-    status: CustomerStatus | str | None = None
+    category: Annotated[CustomerCategory | str, coerce_to_enum(CustomerCategory)] | None = None
+    status: Annotated[CustomerStatus | str, coerce_to_enum(CustomerStatus)] | None = None
     registration_date: datetime | None = None
     addresses: list[Address] = Field(default_factory=list)
     accounts: list[Account] = Field(default_factory=list)

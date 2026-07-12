@@ -61,3 +61,19 @@ def test_unknown_top_level_field_ignored(load_mock: Callable[[str], Any]) -> Non
     payload = load_mock("customer-info/customer-info-v2.json")
     assert "unknownField" in payload  # the bank mock deliberately includes it
     CustomerInfo.model_validate(payload)  # must not raise
+
+
+def test_customer_enum_fields_parse_as_enums(load_mock: Callable[[str], Any]) -> None:
+    info = CustomerInfo.model_validate(load_mock("customer-info/customer-info-v2.json"))
+    assert type(info.status) is CustomerStatus
+    spec_condition = info.accounts[0].spec_conditions[0]
+    assert type(spec_condition.code) is SpecConditionCode
+    assert spec_condition.code is SpecConditionCode.AI11
+    assert isinstance(SpecConditionCode.AI11.description, str)
+    assert SpecConditionCode.AI11.description != ""
+
+
+def test_customer_unknown_status_degrades_to_str() -> None:
+    info = CustomerInfo.model_validate({"status": "FROZEN"})
+    assert info.status == "FROZEN"
+    assert type(info.status) is str

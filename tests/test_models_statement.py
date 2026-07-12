@@ -8,7 +8,7 @@ from decimal import Decimal
 from typing import Any
 
 from alfabank.enums import Direction, OperationCode
-from alfabank.models.statement import StatementPage, StatementSummary
+from alfabank.models.statement import StatementPage, StatementSummary, Transaction
 
 
 def test_statement_page_parses_bank_mock(load_mock: Callable[[str], Any]) -> None:
@@ -92,6 +92,20 @@ def test_statement_page_defaults() -> None:
     assert page.transactions == []
     assert page.links == []
     assert page.has_next is False
+
+
+def test_transaction_enum_fields_parse_as_enums(load_mock: Callable[[str], Any]) -> None:
+    tx = StatementPage.model_validate(load_mock("transactions/statement.json")).transactions[0]
+    assert type(tx.direction) is Direction
+    assert type(tx.operation_code) is OperationCode
+    assert isinstance(tx.operation_code.description, str)
+    assert tx.operation_code.description != ""
+
+
+def test_transaction_unknown_direction_degrades_to_str() -> None:
+    tx = Transaction.model_validate({"direction": "SIDEWAYS"})
+    assert tx.direction == "SIDEWAYS"
+    assert type(tx.direction) is str
 
 
 def test_summary_parses_bank_mock(load_mock: Callable[[str], Any]) -> None:

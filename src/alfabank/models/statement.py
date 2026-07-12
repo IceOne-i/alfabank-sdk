@@ -5,12 +5,13 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 from datetime import date, datetime
+from typing import Annotated
 
 from pydantic import Field
 
 from alfabank._utils import page_from_href
 from alfabank.enums import Direction, OperationCode
-from alfabank.models.common import Money, _AlfaBase
+from alfabank.models.common import Money, _AlfaBase, coerce_to_enum
 
 
 class CartInfo(_AlfaBase):
@@ -135,10 +136,10 @@ class Transaction(_AlfaBase):
     uuid: str | None = None
     transaction_id: str | None = None
     number: str | None = None
-    direction: Direction | str | None = None
+    direction: Annotated[Direction | str, coerce_to_enum(Direction)] | None = None
     amount: Money | None = None
     amount_rub: Money | None = None
-    operation_code: OperationCode | str | None = None
+    operation_code: Annotated[OperationCode | str, coerce_to_enum(OperationCode)] | None = None
     document_date: date | None = None
     operation_date: datetime | None = None
     payment_purpose: str | None = None

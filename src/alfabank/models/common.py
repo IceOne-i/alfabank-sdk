@@ -3,9 +3,25 @@
 from __future__ import annotations
 
 from decimal import Decimal
+from enum import Enum
+from typing import Any
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, BeforeValidator, ConfigDict
 from pydantic.alias_generators import to_camel
+
+
+def coerce_to_enum(enum_cls: type[Enum]) -> BeforeValidator:
+    """Try the enum for known wire values; keep the raw value for unknown ones."""
+
+    def _coerce(value: Any) -> Any:
+        if isinstance(value, enum_cls):
+            return value
+        try:
+            return enum_cls(value)
+        except ValueError:
+            return value
+
+    return BeforeValidator(_coerce)
 
 
 class _AlfaBase(BaseModel):
