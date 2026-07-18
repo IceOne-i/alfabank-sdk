@@ -23,3 +23,4 @@ src/alfabank/_version.py
 .mypy_cache/
 .coverage
 htmlcov/
+docs/bank-support-reply.md
