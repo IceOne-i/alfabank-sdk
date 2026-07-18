@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "alfabank-sdk"
 dynamic = ["version"]
-description = "Async Python SDK for the Alfa-Bank Alfa API (h2h): statements, turnover summary, customer info"
+description = "Unofficial async Python SDK for the Alfa-Bank Alfa API (h2h): statements, turnover summary, customer info"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

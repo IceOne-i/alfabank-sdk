@@ -8,6 +8,22 @@
 - Ретраи с учётом идемпотентности, опциональный rate limiter
 - Две схемы аутентификации банка: `ApiKey` и `Bearer` + шов `token_provider` под OAuth
 
+## ⚠️ Disclaimer
+
+> **Этот проект — НЕОФИЦИАЛЬНЫЙ SDK.**
+>
+> Он создан и поддерживается сообществом. Этот SDK **не является официальным**, **не имеет отношения** к АО «Альфа-Банк» ([https://alfabank.ru](https://alfabank.ru)), не одобрен и не спонсирован им. Все упомянутые торговые марки и названия принадлежат их законным владельцам.
+>
+> Используете на свой страх и риск. Авторы и контрибьюторы не несут ответственности за любые последствия использования этой библиотеки.
+>
+> ---
+>
+> **This project is an UNOFFICIAL SDK.**
+>
+> It is community-maintained and is **NOT affiliated with**, endorsed by, sponsored by, or in any way officially connected with Alfa-Bank (АО «Альфа-Банк», [https://alfabank.ru](https://alfabank.ru)). All trademarks and product names mentioned belong to their respective owners.
+>
+> Use at your own risk. The authors and contributors are not liable for any consequences arising from the use of this library.
+
 ## Установка
 
 ```bash
