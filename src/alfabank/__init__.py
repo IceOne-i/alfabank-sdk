@@ -1,7 +1,7 @@
 """alfabank-sdk: unofficial async Python SDK for the Alfa-Bank Alfa API (h2h).
 
 This SDK is **not affiliated** with, endorsed by, or in any way officially
-connected with Alfa-Bank (АО «Альфа-Банк», https://alfabank.ru).
+connected with Alfa-Bank (https://alfabank.ru).
 
 Quickstart:
     from alfabank import AlfaBankClient
